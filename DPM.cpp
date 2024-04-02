@@ -1,12 +1,34 @@
-#include<iostream>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+
 using namespace std;
 
-int main()
+const int MAX_STUDENTS = 100;
+const int MAX_COMPANIES = 100;
+const int MAX_PROGRAMS = 100;
+
+struct Student
 {
+    string fullName;
+    string lastName;
+    bool selected;
+    int roundsPassed;
+};
 
-    cout<<"chaliye shru karte hai,sabar ka fal mitha";
-    
+struct Company
+{
+    string name;
+    int placements[1]; // Assuming only one year for simplicity
+};
 
-    return 0;
+struct ProgramStats
+{
+    string program;
+    int selectedCount;
+    int unselectedCount;
+};
 
-}
+
+
