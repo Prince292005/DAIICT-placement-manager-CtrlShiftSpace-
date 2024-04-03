@@ -50,7 +50,21 @@ void parseCSVLine(const string &line, Student students[], Company companies[], P
         students[numStudents].roundsPassed = 0; // Default value
     }
     getline(ss, cell, ','); // Reading company name
-
+  // Update program statistics
+    bool foundProgram = false;
+    for (int i = 0; i < numPrograms; i++)
+    {
+        if (programStats[i].program == students[numStudents].lastName)
+        {
+            foundProgram = true;
+            if (students[numStudents].selected)
+                programStats[i].selectedCount++;
+                
+            else
+                programStats[i].unselectedCount++;
+            break;
+        }
+    }
 
 
 
