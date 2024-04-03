@@ -30,6 +30,28 @@ struct ProgramStats
     int unselectedCount;
 };
 
+void parseCSVLine(const string &line, Student students[], Company companies[], ProgramStats programStats[], int &numStudents, int &numCompanies, int &numPrograms)
+{
+    stringstream ss(line);
+    string cell;
+
+    getline(ss, students[numStudents].fullName, ',');
+    getline(ss, students[numStudents].lastName, ','); // Read the program name
+    getline(ss, cell, ',');
+    students[numStudents].selected = (cell == "p");
+    getline(ss, cell, ',');
+    try
+    {
+        students[numStudents].roundsPassed = stoi(cell);
+    }
+    catch (const std::invalid_argument &e)
+    {
+        cerr << "Invalid value for roundsPassed. Setting to default (0)." << endl;
+        students[numStudents].roundsPassed = 0; // Default value
+    }
+    getline(ss, cell, ','); // Reading company name
+
+
 
 
 int main()
