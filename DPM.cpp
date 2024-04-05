@@ -97,6 +97,31 @@ if (!foundProgram)
     numStudents++;
 }
 
+void exportToCSV(const ProgramStats programStats[], const Company companies[], int numPrograms, int numCompanies)
+{
+    ofstream outputFile("placement_summary.csv");
+    if (!outputFile.is_open())
+    {
+        cerr << "Error opening output file!" << endl;
+        return;
+    }
+
+    outputFile << "Program,Selected,Unselected\n";
+ for (int i = 0; i < numPrograms; i++)
+    {
+        outputFile << programStats[i].program << "," << programStats[i].selectedCount << "," << programStats[i].unselectedCount << "\n";
+    }
+
+    outputFile << "\nCompany,Placements in 2024\n";
+    for (int i = 0; i < numCompanies; i++)
+    {
+        outputFile << companies[i].name << "," << companies[i].placements[0] << "\n";
+    }
+  outputFile.close();
+}
+
+
+
 void deleteRecord(vector<Student> &students, vector<ProgramStats> &programStats, const string& programName) {
     if (students.empty()) {
         cout << "No records to delete!" << endl;
