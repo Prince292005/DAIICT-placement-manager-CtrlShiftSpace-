@@ -20,7 +20,7 @@ struct Student
 struct Company
 {
     string name;
-    int placements[1]; // Assuming only one year for simplicity
+    int placements[1]; //for only one year
 };
 
 struct ProgramStats
@@ -36,7 +36,7 @@ void parseCSVLine(const string &line, Student students[], Company companies[], P
     string cell;
 
     getline(ss, students[numStudents].fullName, ',');
-    getline(ss, students[numStudents].lastName, ','); // Read the program name
+    getline(ss, students[numStudents].lastName, ',');
     getline(ss, cell, ',');
     students[numStudents].selected = (cell == "p");
     getline(ss, cell, ',');
@@ -66,7 +66,33 @@ void parseCSVLine(const string &line, Student students[], Company companies[], P
         }
     }
 
+void deleteRecord(vector<Student> &students, vector<ProgramStats> &programStats, const string& programName) {
+    if (students.empty()) {
+        cout << "No records to delete!" << endl;
+        return;
+    }
 
+    cout << "Enter SR. No. of record to delete: ";
+    int srno;
+    cin >> srno;
+    auto it = find_if(students.begin(), students.end(), [srno](const Student &s) { return s.srno == srno; });
+    if (it == students.end()) {
+        cout << "Record with SR. No. " << srno << " not found!" << endl;
+        return;
+    }
+
+    // Updating
+    auto& deletedStudent = *it;
+    for (auto &stats : programStats) {
+        if (stats.program == programName) {
+            stats.selectedCount--;
+            break;
+        }
+    }
+
+    students.erase(it);
+    cout << "Record deleted successfully!" << endl;
+}
 
 int main()
 {
