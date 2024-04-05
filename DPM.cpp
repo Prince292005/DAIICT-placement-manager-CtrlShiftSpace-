@@ -64,7 +64,38 @@ void parseCSVLine(const string &line, Student students[], Company companies[], P
                 programStats[i].unselectedCount++;
             break;
         }
+    
     }
+if (!foundProgram)
+    {
+        programStats[numPrograms].program = students[numStudents].lastName;
+        if (students[numStudents].selected)
+            programStats[numPrograms].selectedCount = 1;
+        else
+            programStats[numPrograms].unselectedCount = 1;
+        numPrograms++;
+    }
+
+    // Update company information
+    bool foundCompany = false;
+    for (int i = 0; i < numCompanies; i++)
+    {
+        if (companies[i].name == cell)
+        {
+            companies[i].placements[0]++;
+            foundCompany = true;
+            break;
+        }
+    }
+    if (!foundCompany)
+    {
+        companies[numCompanies].name = cell;
+        companies[numCompanies].placements[0] = 1;
+        numCompanies++;
+    }
+
+    numStudents++;
+}
 
 void deleteRecord(vector<Student> &students, vector<ProgramStats> &programStats, const string& programName) {
     if (students.empty()) {
