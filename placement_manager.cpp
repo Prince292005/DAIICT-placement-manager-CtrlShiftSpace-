@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+
 using namespace std;
 
 struct student{
@@ -11,14 +12,15 @@ struct student{
     string name;
     string interview_date;
     string interview_status;
+    int package_offered;
     string time_start;
     string time_end;
     int student_id;
     string email;
     string program;
-    long long contact_no;
-    long long whatsapp_no;
-    long long alt_no;
+    long contact_no;
+    long whatsapp_no;
+    long alt_no;
     string skype_id;
 };
 
@@ -38,6 +40,8 @@ void add_record (){
     getline(cin, s.interview_date);
     cout << "Interview status (completed/not completed) :";
     getline(cin, s.interview_status);
+    cout << "Package offered (n/a if not available): ";
+    cin >> s.package_offered; cin.ignore();
     cout << "Interview start time : ";
     getline(cin, s.time_start);
     cout << "Interview end time : ";
@@ -57,7 +61,6 @@ void add_record (){
     cout << "Student Skype Id : ";
     getline(cin, s.skype_id);
 
-
     string file_name = "placement_data_" + s.company_name +".csv";
     
     ifstream file;
@@ -70,6 +73,7 @@ void add_record (){
     fout << s.name << ","
         << s.interview_date << ","
         << s.interview_status << ","
+        << s.package_offered << ","
         << s.time_start << ","
         << s.time_end << ","
         << s.student_id << ","
@@ -83,7 +87,6 @@ void add_record (){
     cout << "Record added successfully!" << endl;
     fout.close();
     file.close();
-
 
 }
 
@@ -115,7 +118,7 @@ void delete_record() {
         while (getline(ss, column, ',')) {
             columns.push_back(column);
         }
-        if (columns.size() > 0 && columns[5] == stud_id_to_delete) {
+        if (columns.size() > 0 && columns[6] == stud_id_to_delete) {
             found = true;
             continue;
         }
@@ -136,7 +139,7 @@ void delete_record() {
         return;
     }
     if (rename("temp.csv", file_name.c_str()) != 0) {
-        cout << "Error: Unable to rename file." << endl;
+        cout << "Unable to delete the file!" << endl;
         return;
     }
 
@@ -170,20 +173,21 @@ void display_record(){
         while (getline(ss, column, ',')) {
             columns.push_back(column);
         }
-        if (columns.size() > 0 && columns[5] == stud_to_display) {
+        if (columns.size() > 0 && columns[6] == stud_to_display) {
             found = true;
             cout << "Student Name : " << columns[0] << endl;
             cout << "Interview Date : " << columns[1] << endl;
             cout << "Interview Status : "  << columns[2] << endl;
-            cout << "Interview Start Time : " << columns[3] << endl;
-            cout << "Interview End Time : " << columns[4] << endl;
-            cout << "Student ID : " << columns[5] << endl;
-            cout << "Email : " << columns[6] << endl;
-            cout << "Program enrolled : " << columns[7] << endl;
-            cout << "Contact Number : " << columns[8] << endl;
-            cout << "Whatsapp Number : " << columns[9] << endl;
-            cout << "Alternate Number : " << columns[10] << endl;
-            cout << "Skype ID : " << columns[11] << endl;
+            cout << "Package Offered : " << columns[3] << endl;
+            cout << "Interview Start Time : " << columns[4] << endl;
+            cout << "Interview End Time : " << columns[5] << endl;
+            cout << "Student ID : " << columns[6] << endl;
+            cout << "Email : " << columns[7] << endl;
+            cout << "Program enrolled : " << columns[8] << endl;
+            cout << "Contact Number : " << columns[9] << endl;
+            cout << "Whatsapp Number : " << columns[10] << endl;
+            cout << "Alternate Number : " << columns[11] << endl;
+            cout << "Skype ID : " << columns[12] << endl;
             break;
         }
     }
@@ -234,6 +238,8 @@ void update_record() {
             getline(cin, updated_student.interview_date);
             cout << "Interview status (completed/not completed): ";
             getline(cin, updated_student.interview_status);
+            cout << "Package Offered: ";
+            cin >> updated_student.package_offered;
             cout << "Interview start time: ";
             getline(cin, updated_student.time_start);
             cout << "Interview end time: ";
@@ -257,6 +263,7 @@ void update_record() {
             fout << updated_student.name << ","
                  << updated_student.interview_date << ","
                  << updated_student.interview_status << ","
+                 << updated_student.package_offered << ","
                  << updated_student.time_start << ","
                  << updated_student.time_end << ","
                  << updated_student.student_id << ","
@@ -291,31 +298,23 @@ void update_record() {
 
 int main(){
 
-    int choice = 0;
-    while (choice!= 5){
+    int c = 0;
+    while (c!= 5){
         cout << "===========================================\n";
         cout << "Welcome to the Placement Management System!\n";
         cout << "===========================================\n";
-        cout << "1. Add record\n2. Update record\n3. Delete record\n4. Display record\n5. Exit\n";
+        cout << "1. Add a record\n2. Update a record\n3. Delete a record\n4. Display a record\n5. Exit from program\n";
         cout << "===========================================\n";
         cout << "Enter your choice : ";
-        cin >> choice; cin.ignore();
+        cin >> c; cin.ignore();
 
-        switch(choice){
-            case(1):
-                add_record(); break;
-            case(2):
-                update_record(); break;
-            case(3):
-                delete_record(); break;
-            case(4):
-                display_record(); break;
-            case(5):
-                cout << "Thanks for using!"; break;
-            default:
-                cout << "Invalid Input! Try Again!\n";
+        if (c==1) add_record();
+        else if (c==2) update_record();
+        else if (c==3) delete_record();
+        else if (c==4) display_record();
+        else if(c==5) cout << "Thanks for using!" << endl;
+        else cout << "Invalid Input!" << endl;
         }
-    }
 
     return 0;
 }
