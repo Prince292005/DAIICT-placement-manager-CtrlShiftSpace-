@@ -11,9 +11,9 @@
    
    Dhruv malani      -202301046      --  20%       -- contributed in add and display function and project report making
    
-   Prince sojitra    -202301126      --  25%      --  contributed in add and display function and project report making
+   Prince sojitra    -202301126      --  20%      --  contributed in add and display function and project report making
     
-   Yogesh bagotia    -202301114      --  5%      --  contributed in delete function 
+   Yogesh bagotia    -202301114      --  10%      --  contributed in delete function
 
 
 
