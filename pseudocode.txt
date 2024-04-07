@@ -3,14 +3,15 @@ Created by the group "CtrlShififtSpace"
 
 ================================================================
 
-struct studentstudent:
+struct student:
     string company_name
     string name
     string interview_date
     string interview_status
+    int package_offered;
     string time_start
     string time_end
-    int studentstudent_id
+    int student_id
     string email
     string program
     long contact_no
@@ -25,19 +26,21 @@ function add_record():
     output "Interviewing Company Name : "
     input s.company_name
 
-    output "---:Enter studentstudent details:---"
+    output "---:Enter student details:---"
     output "Student Name: "
     input s.name
     output "Interview Date: "
     input s.interview_date
     output "Interview status (completed/not completed) :"
     input s.interview_status
+    output "Package offered :"
+    input s.package_offered;
     output "Interview start time : "
     input s.time_start
     output "Interview  time : "
     input s.time_end
-    output "Studentstudent ID: "
-    input s.studentstudent_id
+    output "Student ID: "
+    input s.student_id
     output "Email : "
     input s.email
     output "Program enrolled : "
@@ -48,7 +51,7 @@ function add_record():
     input s.whatsapp_no
     output "Alternate Number: "
     input s.alt_no
-    output "Studentstudent Skype Id : "
+    output "Student Skype Id : "
     input s.skype_id
 
     file_name = "placement_data_" + s.company_name + ".csv"
@@ -127,15 +130,16 @@ function display_record():
             output "Student Name : " + columns[0]
             output "Interview Date : " + columns[1]
             output "Interview Status : " + columns[2]
-            output "Interview Start Time : " + columns[3]
-            output "Interview End Time : " + columns[4]
-            output "Student ID : " + columns[5]
-            output "Email : " + columns[6]
-            output "Program enrolled : " + columns[7]
-            output "Contact Number : " + columns[8]
-            output "Whatsapp Number : " + columns[9]
-            output "Alternate Number : " + columns[10]
-            output "Skype ID : " + columns[11]
+            output "Package Offered : " + columns[3]
+            output "Interview Start Time : " + columns[4]
+            output "Interview End Time : " + columns[5]
+            output "Student ID : " + columns[6]
+            output "Email : " + columns[7]
+            output "Program enrolled : " + columns[8]
+            output "Contact Number : " + columns[9]
+            output "Whatsapp Number : " + columns[10]
+            output "Alternate Number : " + columns[11]
+            output "Skype ID : " + columns[12]
         exit while
         
     end while
@@ -197,7 +201,7 @@ function main():
         output "==========================================="
         output "1. Add record"
         output "2. Update record"
-        output "3.  delete record"
+        output "3. Delete record"
         output "4. Display record"
         output "5. Exit"
         output "==========================================="
