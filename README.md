@@ -1,7 +1,7 @@
 # DAIICT-placement-manager-CtrlShiftSpace-
 # WELCOME TO OUR PROJECT 
 
-<br>
+
 
 
 
@@ -9,11 +9,11 @@
         NAME            SID         CONTRIBUTION
    Rajdeep patel
    
-   Dhruv malani 
+   Dhruv malani      202301046
    
    Prince sojitra    202301126 
    
-   Yogesh bagotia
+   Yogesh bagotia    202301114
 
 
 
