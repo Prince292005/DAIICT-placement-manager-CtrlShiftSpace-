@@ -9,6 +9,7 @@ using namespace std;
 struct student{
     string company_name;
 
+
     string name;
     string interview_date;
     string interview_status;
@@ -18,9 +19,9 @@ struct student{
     int student_id;
     string email;
     string program;
-    long contact_no;
-    long whatsapp_no;
-    long alt_no;
+    long long contact_no;
+    long long whatsapp_no;
+    long long alt_no;
     string skype_id;
 };
 
@@ -40,7 +41,7 @@ void add_record (){
     getline(cin, s.interview_date);
     cout << "Interview status (completed/not completed) :";
     getline(cin, s.interview_status);
-    cout << "Package offered (n/a if not available): ";
+    cout << "Package offered (-1 if not available): ";
     cin >> s.package_offered; cin.ignore();
     cout << "Interview start time : ";
     getline(cin, s.time_start);
@@ -225,7 +226,7 @@ void update_record() {
         while (getline(ss, column, ',')) {
             columns.push_back(column);
         }
-        if (columns.size() > 0 && columns[5] == stud_id_to_update) {
+        if (columns.size() > 0 && columns[6] == stud_id_to_update) {
             found = true;
 
             student updated_student;
@@ -240,7 +241,7 @@ void update_record() {
             getline(cin, updated_student.interview_status);
             cout << "Package Offered: ";
             cin >> updated_student.package_offered;
-            cout << "Interview start time: ";
+            cout << "Interview start time: "; cin.ignore();
             getline(cin, updated_student.time_start);
             cout << "Interview end time: ";
             getline(cin, updated_student.time_end);
