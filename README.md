@@ -7,13 +7,13 @@
 
 
         NAME            SID         CONTRIBUTION
-   Rajdeep patel     202301092
+   Rajdeep patel     -202301092
    
-   Dhruv malani      202301046
+   Dhruv malani      -202301046
    
-   Prince sojitra    202301126 
+   Prince sojitra    -202301126 
    
-   Yogesh bagotia    202301114
+   Yogesh bagotia    -202301114
 
 
 
