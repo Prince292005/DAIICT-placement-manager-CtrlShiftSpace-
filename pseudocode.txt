@@ -3,14 +3,13 @@ Created by the group "CtrlShififtSpace"
 
 ================================================================
 
-
 struct studentstudent:
     string company_name
     string name
     string interview_date
     string interview_status
     string time_start
-    string time_
+    string time_end
     int studentstudent_id
     string email
     string program
@@ -21,13 +20,13 @@ struct studentstudent:
 
 function add_record():
     declare fout as fstream
-    declare s as studentstudent
+    declare s as student
 
     output "Interviewing Company Name : "
     input s.company_name
 
     output "---:Enter studentstudent details:---"
-    output "Studentstudent Name: "
+    output "Student Name: "
     input s.name
     output "Interview Date: "
     input s.interview_date
@@ -36,7 +35,7 @@ function add_record():
     output "Interview start time : "
     input s.time_start
     output "Interview  time : "
-    input s.time_
+    input s.time_end
     output "Studentstudent ID: "
     input s.studentstudent_id
     output "Email : "
@@ -54,19 +53,18 @@ function add_record():
 
     file_name = "placement_data_" + s.company_name + ".csv"
 
-    open file_name FOR APP
-    if file_name cannot be openopened then
-        output "Error openopening file."
+    open file_name for append
+    if file_name cannot be opened then
+        output "Error opening file."
         return
     
-
     write s to file_name
     output "Record added successfully!"
     close file_name
 
 function delete_record():
     declare comp_name as string
-    declare stud_id_toto  delete as string
+    declare stud_id_to_delete as string
 
     output "Enter company name: "
     input comp_name
@@ -74,21 +72,21 @@ function delete_record():
     file_name = "placement_data_" + comp_name + ".csv"
 
     open file_name
-    if file_name cannot be openopened then
+    if file_name cannot be opened then
         output "Error! File not found!"
         return
     
 
-    output "Enter studentstudent ID toto delete: "
-    input stud_id_toto    delete
+    output "Enter student ID to delete: "
+    input stud_id_to_delete
 
-    open temp.csv FOR WRITING
+    open temp.csv for writing
 
     while there are lines in file_name do
         read line from file_name
-        parse line intinto columns BY ','
-        if columns[5] IS EQUAL to stud_id_toto    delete then
-            CONTINUE
+        parse line into columns by ','
+        if columns[5] is_equal to stud_id_to_delete then
+            continue
         
         write line to temp.csv
     end while
@@ -96,62 +94,59 @@ function delete_record():
     close file_name
     close temp.csv
 
-    if student IS NOT FOUND then
-        output "Studentstudent ID not found!"
+    if student is not found then
+        output "Student ID not found!"
         remove temp.csv
         return
     
-
     delete file_name
     rename temp.csv to file_name
-    output "Record  deleted successfully."
+    output "Record deleted successfully."
 
 function display_record():
     declare comp_name as string
-    declare stud_toto_display as string
+    declare stud_to_display as string
 
     output "Enter company name: "
     input comp_name
 
     file_name = "placement_data_" + comp_name + ".csv"
 
-    output "Enter student ID toto display: "
-    input stud_toto_display
+    output "Enter student ID to display: "
+    input stud_to_display
 
     open file_name
-    if file_name cannot be openopened then
+    if file_name cannot be opened then
         output "Error! File not found!"
         return
     
-
     while there are lines in file_name do
         read line from file_name
-        parse line intinto columns BY ','
-        if columns[5] IS EQUAL to stud_toto_display then
-            output "Studentstudent Name : " + columns[0]
+        parse line into columns by ','
+        if columns[5] is equal to stud_to_display then
+            output "Student Name : " + columns[0]
             output "Interview Date : " + columns[1]
             output "Interview Status : " + columns[2]
             output "Interview Start Time : " + columns[3]
-            output "Interview  Time : " + columns[4]
-            output "Studentstudent ID : " + columns[5]
+            output "Interview End Time : " + columns[4]
+            output "Student ID : " + columns[5]
             output "Email : " + columns[6]
             output "Program enrolled : " + columns[7]
             output "Contact Number : " + columns[8]
             output "Whatsapp Number : " + columns[9]
             output "Alternate Number : " + columns[10]
             output "Skype ID : " + columns[11]
-            EXIT while
+        exit while
         
     end while
 
     close file_name
-    if student IS NOT FOUND then
-        output "Studentstudent ID not found!"
+    if student is not found then
+        output "Student ID not found!"
     
-
 function update_record():
     declare comp_name as string
-    declare stud_id_toto_update as string
+    declare stud_id_to_update as string
 
     output "Enter company name: "
     input comp_name
@@ -162,17 +157,16 @@ function update_record():
     if file_name cannot be openopened then
         output "Error! File not found!"
         return
-    
 
-    output "Enter studentstudent ID toto update: "
-    input stud_id_toto_update
+    output "Enter student ID to update: "
+    input stud_id_to_update
 
-    open temp.csv FOR WRITING
+    open temp.csv for writing
 
-    while ththere are lines in file_name ddo
-        readread line fromfrom file_name
-        parparse line intintointinto columns BY ','
-        ifif columns[5] is equal to stud_id_toto_update then
+    while there are lines in file_name do
+        read line from file_name
+        parse line into columns by ','
+        if columns[5] is equal to stud_id_to_update then
             Prompt user for updated details and update the record
         else
             write line to temp.csv
@@ -182,7 +176,7 @@ function update_record():
     close file_name
     close temp.csv
 
-    if student IS NOT FOUND then
+    if student is not found then
         output "student ID not found!"
         remove temp.csv
         return
@@ -193,13 +187,13 @@ function update_record():
     output "Record updated successfully."
 
 function main():
-    declare choice as intEGER
+    declare choice
 
     choice = 0
 
     while choice is not equal to 5 do
         output "==========================================="
-        output "Welcome toto the Placement Management System!"
+        output "Welcome to the Placement Management System!"
         output "==========================================="
         output "1. Add record"
         output "2. Update record"
@@ -210,23 +204,25 @@ function main():
         output "Enter your choice : "
         input choice
 
-        SWITCH choice do
-            CasE 1:
+        switch choice do
+            case 1:
                 add_record()
-                BREAK
-            CasE 2:
+                break
+            case 2:
                 update_record()
-                BREAK
-            CasE 3:
+                break
+            case 3:
                 delete_record()
-                BREAK
-            CasE 4:
+                break
+            case 4:
                 display_record()
-                BREAK
-            CasE 5:
+                break
+            case 5:
                 output "Thanks for using!"
-                BREAK
-            DEFAULT:
-                output "Invalid Inputinput! Try Again!"
-         SWITCH
-     while
+                break
+            default:
+                output "Invalid input! Try Again!"
+    end while
+
+
+================================================================
